@@ -14,12 +14,17 @@ jobs:
       AWS_REGION: ap-northeast-1
 
     steps:
-      - uses: actions/checkout@v3
+      #- uses: actions/checkout@v3
 
-      - name: Configure aws credentials
-        uses: aws-actions/configure-aws-credentials@v1-node16
-        with:
-          role-to-assume: ${{ env.AWS_ROLE_ARN }}
-          aws-region: ${{ env.AWS_REGION }}
+      - run: |
+          echo "${{ env.AWS_ACCOUNT_ID }}"
+          echo "${{ AWS_ROLE_ARN }}"
+          echo "${{ AWS_REGION }}"
 
-      - run: echo "${GITHUB_REF##*/}"
+      #- name: Configure aws credentials
+      #  uses: aws-actions/configure-aws-credentials@v1-node16
+      #  with:
+      #    role-to-assume: ${{ env.AWS_ROLE_ARN }}
+      #    aws-region: ${{ env.AWS_REGION }}
+
+      #- run: echo "${GITHUB_REF##*/}"
