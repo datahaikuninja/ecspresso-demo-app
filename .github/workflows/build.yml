@@ -6,4 +6,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - run: echo ${GITHUB_REF##*/}
+      - run: |
+          echo "${{ github.event.release.tag_name }}"
+          echo "${GITHUB_REF}"
+          echo "${GITHUB_REF##*/}"
