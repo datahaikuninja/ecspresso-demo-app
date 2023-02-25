@@ -10,7 +10,7 @@ jobs:
       contents: read
     env:
       AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
-      AWS_ROLE_ARN: 'arn:aws:iam::${{ env.AWS_ACCOUNT_ID }}:role/GitHubActionsOIDCRoleFor_datahaikuninja_ecspresso-demo-app'
+      AWS_ROLE_ARN: arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/GitHubActionsOIDCRoleFor_datahaikuninja_ecspresso-demo-app
       AWS_REGION: ap-northeast-1
 
     steps:
