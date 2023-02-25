@@ -22,5 +22,4 @@ jobs:
           role-to-assume: ${{ env.AWS_ROLE_ARN }}
           aws-region: ${{ env.AWS_REGION }}
 
-    steps:
       - run: echo "${GITHUB_REF##*/}"
