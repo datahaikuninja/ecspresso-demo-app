@@ -9,17 +9,12 @@ jobs:
       id-token: write
       contents: read
     env:
-      AWS_ACCOUNT_ID: "753172984754"
-      AWS_ROLE_ARN: arn:aws:iam::753172984754:role/GitHubActionsOIDCRoleFor_datahaikuninja_ecspresso-demo-app
+      AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
+      AWS_ROLE_ARN: "arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/GitHubActionsOIDCRoleFor_datahaikuninja_ecspresso-demo-app"
       AWS_REGION: ap-northeast-1
 
     steps:
       - uses: actions/checkout@v3
-
-      - run: |
-          echo "${{ env.AWS_ACCOUNT_ID}}"
-          echo "${{ env.AWS_ROLE_ARN}}"
-          echo "${{ env.AWS_REGION}}"
 
       - name: Configure aws credentials
         uses: aws-actions/configure-aws-credentials@v1-node16
