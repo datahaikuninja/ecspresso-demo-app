@@ -2,7 +2,7 @@
   "containerDefinitions": [ 
      { 
         "essential": true,
-        "image": "{{ must_env `AWS_ACCOUNT_ID` }}.dkr.ecr.ap-northeast-1.amazonaws.com/ecspresso-demo-app:latest",
+        "image": "{{ must_env `AWS_ACCOUNT_ID` }}.dkr.ecr.ap-northeast-1.amazonaws.com/ecspresso-demo-app:{{ must_env `TAG` }}",
         "logConfiguration": { 
            "logDriver": "awslogs",
            "options": { 

@@ -1,0 +1,32 @@
+name: ci
+
+on: [workflow_dispatch]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+    env:
+      AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
+      AWS_ROLE_ARN: "arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/GitHubActionsOIDCRoleFor_datahaikuninja_ecspresso-demo-app"
+      AWS_REGION: ap-northeast-1
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - run: echo "TAG=${GITHUB_REF##*/}" >> $GITHUB_ENV
+
+      - name: Configure aws credentials
+        uses: aws-actions/configure-aws-credentials@v1-node16
+        with:
+          role-to-assume: ${{ env.AWS_ROLE_ARN }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Deploy latest version
+        uses: kayac/ecspresso@v2
+        with:
+          version: v2.0.4
+      - run: |
+          ecspresso verify && ecspresso deploy
