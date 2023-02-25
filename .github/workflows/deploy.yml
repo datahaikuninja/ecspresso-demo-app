@@ -3,7 +3,7 @@ name: Deploy
 on: [workflow_dispatch]
 
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
     permissions:
       id-token: write
@@ -28,5 +28,7 @@ jobs:
         uses: kayac/ecspresso@v2
         with:
           version: v2.0.4
+
       - run: |
           ecspresso verify && ecspresso deploy
+        working-directory: ./ecspresso
