@@ -18,8 +18,8 @@ jobs:
 
       - run: |
           echo "${{ env.AWS_ACCOUNT_ID }}"
-          echo "${{ AWS_ROLE_ARN }}"
-          echo "${{ AWS_REGION }}"
+          echo "${{ env.AWS_ROLE_ARN }}"
+          echo "${{ env.AWS_REGION }}"
 
       #- name: Configure aws credentials
       #  uses: aws-actions/configure-aws-credentials@v1-node16
