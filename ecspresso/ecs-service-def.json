@@ -1,0 +1,55 @@
+{
+  "serviceName": "ecspresso-demo-app",
+  "taskDefinition": "arn:aws:ecs:ap-northeast-1:{{ must_env `AWS_ACCOUNT_ID` }}:task-definition/ecspresso-demo-app:",
+  "loadBalancers": [
+      {
+          "targetGroupArn": "{{ tfstate `aws_lb_target_group.this.arn` }}",
+          "containerName": "nuxt3",
+          "containerPort": 3000
+      }
+  ],
+  "desiredCount": 1,
+  "capacityProviderStrategy": [
+      {
+          "capacityProvider": "FARGATE_SPOT",
+          "weight": 1,
+          "base": 1
+      },
+      {
+        "capacityProvider": "FARGATE",
+        "weight": 0,
+        "base": 0
+    }
+  ],
+  "platformVersion": "LATEST",
+  "platformFamily": "LINUX",
+  "deploymentConfiguration": {
+      "maximumPercent": 200,
+      "minimumHealthyPercent": 100
+  },
+  "networkConfiguration": {
+      "awsvpcConfiguration": {
+          "subnets": [
+            "{{ tfstate `aws_subnet.public_a.id` }}",
+            "{{ tfstate `aws_subnet.public_c.id` }}"
+          ],
+          "securityGroups": [
+            "{{ tfstate `aws_security_group.ecs.id` }}"
+          ],
+          "assignPublicIp": "ENABLED"
+      }
+  },
+  "healthCheckGracePeriodSeconds": 60,
+  "schedulingStrategy": "REPLICA",
+  "deploymentController": {
+      "type": "ECS"
+  },
+  "tags": [
+      {
+          "key": "Name",
+          "value": "ecspresso-demo-app"
+      }
+  ],
+  "enableECSManagedTags": true,
+  "propagateTags": "SERVICE"
+}

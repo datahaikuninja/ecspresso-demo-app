@@ -1,0 +1,15 @@
+version: "3"
+
+services:
+  ecspresso:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: ecspresso-demo-app-ecspresso:0.1.0
+    network_mode: "bridge"
+    volumes:
+      - .:/ecspresso
+      - ~/.aws:/root/.aws:ro
+    tty: true
+    env_file:
+      - .envrc

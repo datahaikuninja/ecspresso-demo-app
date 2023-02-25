@@ -1,0 +1,35 @@
+{
+  "containerDefinitions": [ 
+     { 
+        "essential": true,
+        "image": "{{ must_env `AWS_ACCOUNT_ID` }}.dkr.ecr.ap-northeast-1.amazonaws.com/ecspresso-demo-app:latest",
+        "logConfiguration": { 
+           "logDriver": "awslogs",
+           "options": { 
+              "awslogs-group" : "/ecs/ecspresso-demo-app",
+              "awslogs-region": "ap-northeast-1",
+              "awslogs-stream-prefix": "ecspresso-demo-app"
+           }
+        },
+        "name": "nuxt3",
+        "portMappings": [ 
+           { 
+              "containerPort": 3000,
+              "protocol": "tcp"
+           }
+        ]
+     }
+  ],
+  "cpu": "512",
+  "executionRoleArn": "arn:aws:iam::{{ must_env `AWS_ACCOUNT_ID` }}:role/ecsTaskExecutionRole",
+  "family": "ecspresso-demo-app",
+  "memory": "1GB",
+  "networkMode": "awsvpc",
+  "runtimePlatform": {
+       "operatingSystemFamily": "LINUX",
+       "cpuArchitecture": "X86_64"
+   },
+  "requiresCompatibilities": [ 
+      "FARGATE" 
+   ]
+}
