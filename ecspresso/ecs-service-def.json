@@ -39,7 +39,7 @@
           "assignPublicIp": "ENABLED"
       }
   },
-  "healthCheckGracePeriodSeconds": 60,
+  "healthCheckGracePeriodSeconds": 30,
   "schedulingStrategy": "REPLICA",
   "deploymentController": {
       "type": "ECS"
